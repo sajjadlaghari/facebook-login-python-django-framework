@@ -68,6 +68,34 @@ INSTALLED_APPS = [
 ```
 
 
+#### Open setting.py
+
+```
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends', # Add this line
+                'social_django.context_processors.login_redirect', # Add this line
+
+            ],
+        },
+    },
+]
+
+
+
+````
+
+
 #### let’s migrate the database.
 ``` py manage.py migrate  ```
 
