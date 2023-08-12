@@ -296,7 +296,7 @@ STATICFILES_DIRS = [
 ``` 
 create file styles.css
 ```
-
+#### Add Below code in styles.css file
 ```
 .login-form {
   width: 400px;
@@ -356,3 +356,86 @@ create file styles.css
   z-index: 1;
 }
 ```
+
+
+#### Open facebook/views.py and copy-paste below code into the file.
+
+```
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+ 
+def login(request):
+    return render(request, 'login.html')
+ 
+@login_required
+def home(request):
+    return render(request, 'home.html')
+```
+
+#### Open FacebookLogin/urls.py and copy-paste below code into the file.
+
+```
+from django.contrib import admin
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
+from prime import views
+ 
+urlpatterns = [
+  path('admin/', admin.site.urls),         
+  path("login/", views.login, name="login"),
+  path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+  path('social-auth/', include('social_django.urls', namespace="social")),
+  path("", views.home, name="home"),
+]
+
+```
+
+#### Open FacebooLogin/settings.py file and set these URL variables.
+
+``` 
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+```
+
+#### Now you need to connect your Facebook app with your Django project.
+
+#### Open FacebooLogin/settings.py file and set these URL variables.
+
+``` 
+SOCIAL_AUTH_FACEBOOK_KEY = YOUR_APP_KRY # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = YOUR_APP_SECRET # App Secret
+```
+
+#### Open below url
+
+``` 
+ https://developers.facebook.com/apps
+```
+
+#### After login create My Apps
+
+![image](https://github.com/sajjadlaghari/facebook-login-python-django-framework/assets/68752819/389c0a11-9f6a-4678-8c8d-f10d39107e37)
+
+#### Create your app
+
+![image](https://github.com/sajjadlaghari/facebook-login-python-django-framework/assets/68752819/c798316a-bad4-4cd1-98b3-af4c5b087a15)
+
+#### Enter Your App Name
+
+![image](https://github.com/sajjadlaghari/facebook-login-python-django-framework/assets/68752819/49d1e9f1-0470-49ce-85e0-4b1858dc54dc)
+
+
+#### Go to setting > basics. And set the App Domains as localhost.
+
+![image](https://github.com/sajjadlaghari/facebook-login-python-django-framework/assets/68752819/637360a9-f228-4418-9f87-44d2733dfe82)
+
+#### Site url if localhost
+
+![image](https://github.com/sajjadlaghari/facebook-login-python-django-framework/assets/68752819/64daff2b-6530-42e5-b955-2031d964dd0d)
+
+
+#### Now start server.
+``` python manage.py runserver ```
+
