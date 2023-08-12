@@ -292,8 +292,7 @@ STATICFILES_DIRS = [
 
 ``` create file styles.css ```
 
-``` 
-.login-form {
+``` .login-form {
   width: 400px;
   margin: 30px auto;
 }
@@ -350,5 +349,4 @@ STATICFILES_DIRS = [
   top: -11px;
   z-index: 1;
 }
-
 ```
