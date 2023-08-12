@@ -18,5 +18,37 @@
 
 #### Active Enviroment
 
-``` cd SocialLogin
-.\Scripts\Activate ```
+``` cd SocialLogin ```
+``` cd Scripts cd Activate ```
+
+#### Install Django in your enviroment
+
+``` pip install django  ```
+
+
+#### Create your project. You can give it any name.
+``` django-admin startproject FacebookLogin ```
+
+``` cd FacebookLogin ```
+
+#### Create App
+```  python manage.py startapp facbook ```
+
+#### Add New Installed APP in setting.py INSTALLED_APPS
+
+```
+INSTALLED_APPS = [
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+'facbook',  #add here in Installed APp 
+]
+
+```
+
+
+#### Install the social-auth-app-django modul
+``` pip install social-auth-app-django ```
