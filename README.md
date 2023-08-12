@@ -68,35 +68,6 @@ INSTALLED_APPS = [
 ```
 
 
-
-#### let’s migrate the database.
-``` py manage.py migrate  ```
-
-#### When you migrate you can see all the performed operations on database.
-
-``` py manage.py migrate
-Operations to perform:
-Apply all migrations: admin, auth, contenttypes, sessions
-Running migrations:
-Applying contenttypes.0001_initial… OK
-Applying auth.0001_initial… OK
-Applying admin.0001_initial… OK
-Applying admin.0002_logentry_remove_auto_add… OK
-Applying admin.0003_logentry_add_action_flag_choices… OK
-Applying contenttypes.0002_remove_content_type_name… OK
-Applying auth.0002_alter_permission_name_max_length… OK
-Applying auth.0003_alter_user_email_max_length… OK
-Applying auth.0004_alter_user_username_opts… OK
-Applying auth.0005_alter_user_last_login_null… OK
-Applying auth.0006_require_contenttypes_0002… OK
-Applying auth.0007_alter_validators_add_error_messages… OK
-Applying auth.0008_alter_user_username_max_length… OK
-Applying auth.0009_alter_user_last_name_max_length… OK
-Applying auth.0010_alter_group_name_max_length… OK
-Applying auth.0011_update_proxy_permissions… OK
-Applying sessions.0001_initial… OK
-```
-
 #### let’s migrate the database.
 ``` py manage.py migrate  ```
 
@@ -134,7 +105,26 @@ AUTHENTICATION_BACKENDS = [
   'django.contrib.auth.backends.ModelBackend',
 ]
 ````
-#### Create a new folder with “templates” name into your root app 
+#### Create a new folder with “templates” name into your root app and add Folder name 
+
+``` 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'], # Add Your templates folder name here
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+              ],
+            },
+    },
+]
+
+```
 
 ``` create base.html ```
 
@@ -240,4 +230,54 @@ AUTHENTICATION_BACKENDS = [
 
 {% endblock %}
 
+```
+
+``` create login.html  ```
+
+#### Add Below code in login.html file
+
+``` 
+<!-- templates/login.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="login-form">
+    <form action="/examples/actions/confirmation.php" method="post">
+        <h2 class="text-center">Sign in</h2>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <span class="fa fa-user"></span>
+                    </span>
+                </div>
+                <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary login-btn btn-block">Sign in</button>
+        </div>
+        <div class="clearfix">
+            <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+            <a href="#" class="float-right">Forgot Password?</a>
+        </div>
+        <div class="or-seperator"><i>or</i></div>
+        <p class="text-center">Login with your social media account</p>
+        <div class="text-center social-btn">
+            <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-secondary w-100"><i
+                    class="fa fa-facebook"></i>&nbsp; Sign in with Facebook</a>
+        </div>
+    </form>
+    <p class="text-center text-muted small">Don't have an account? <a href="#">Sign up here!</a></p>
+    {% endblock %}
 ```
