@@ -285,14 +285,20 @@ TEMPLATES = [
 #### Create static folder in Your Project Root and inside static filder create css folder
 
 #### Add static folder in setting.py
-``` STATIC_URL = '/static/'
+
+```
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
-] ```
+]
+```
 
-``` create file styles.css ```
+``` 
+create file styles.css
+```
 
-``` .login-form {
+```
+.login-form {
   width: 400px;
   margin: 30px auto;
 }
